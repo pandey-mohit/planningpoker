@@ -1,0 +1,13 @@
+.header {
+  background-color: #ffffff;
+  padding: 16px 40px;
+  display: flex;
+}
+
+.heading {
+  line-height: 1;
+}
+
+.filler {
+  flex: 1;
+}
