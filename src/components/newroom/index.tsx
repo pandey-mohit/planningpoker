@@ -8,15 +8,43 @@ import styles from "./style.module.css"
 
 interface Props {
   hideDialog: boolean
-  toggleHideDialog?: ToggleHideDialog
+  toggleHideDialog: ToggleHideDialog
+}
+
+interface Participant {
+  roomName: string,
+  userName: string,
+  enterAs: IDropdownOption | undefined
 }
 
 export const NewRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
   const modalProps = React.useMemo(() => ({ isBlocking: true }), [])
-  const [selectedItem, setSelectedItem] = React.useState<IDropdownOption>();
+  const [participant, setParticipant] = React.useState<Participant>({
+    roomName: '',
+    userName: '',
+    enterAs: {
+      key: "host",
+      text: "Host"
+    }
+  })
 
-  const onChange = (event: React.FormEvent<HTMLDivElement>, item?: IDropdownOption): void => {
-    setSelectedItem(item)
+  const onInputChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
+    setParticipant({
+      ...participant,
+      [event.currentTarget.name]: newValue
+    })
+  }
+
+  const onDropDownChange = (event: React.FormEvent<HTMLDivElement>, item?: IDropdownOption): void => {
+    setParticipant({
+      ...participant,
+      enterAs: item
+    })
+  }
+
+  const onSubmit = () => {
+    console.log(participant)
+    toggleHideDialog()
   }
 
   return (
@@ -30,12 +58,13 @@ export const NewRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
       minWidth="480px"
     >
       <div className={styles.content}>
-        <TextField label="Room Name" />
-        <TextField label="Your Name" />
+        <TextField label="Room Name" name="roomName" value={participant.roomName} onChange={onInputChange} />
+        <TextField label="Your Name" name="userName" value={participant.userName} onChange={onInputChange} />
         <Dropdown
           label="Enter as"
-          selectedKey={selectedItem ? selectedItem.key : undefined}
-          onChange={onChange}
+          disabled={true}
+          selectedKey={participant.enterAs ? participant.enterAs.key : undefined}
+          onChange={onDropDownChange}
           placeholder="Select an option"
           options={[
             { key: "participant", text: "Participant" },
@@ -45,7 +74,7 @@ export const NewRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
         />
       </div>
       <DialogFooter>
-        <PrimaryButton text="Start" onClick={toggleHideDialog} />
+        <PrimaryButton text="Start" onClick={onSubmit} />
       </DialogFooter>
     </Dialog>
   )
