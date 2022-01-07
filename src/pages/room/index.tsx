@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useParams } from "react-router-dom"
 import { DefaultButton, PrimaryButton } from "@fluentui/react"
 import { TextField } from "@fluentui/react/lib/TextField"
 import { useBoolean } from '@fluentui/react-hooks'
@@ -6,7 +7,9 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { CreateRoom } from "../../components/createroom"
 import styles from "./style.module.css"
 
-function Landing() {
+const Room: React.FC = (props) => {
+  const { roomId } = useParams()
+  console.log('room: ', roomId)
   const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
   const handleSubmit = () => {
     console.log("handle submit event")
@@ -27,4 +30,4 @@ function Landing() {
   )
 }
 
-export default Landing
+export default Room

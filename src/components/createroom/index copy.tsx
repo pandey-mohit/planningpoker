@@ -1,8 +1,11 @@
 import React from "react"
+import axios from "axios"
 import { Dialog, DialogFooter } from "@fluentui/react/lib/Dialog"
 import { PrimaryButton } from "@fluentui/react"
 import { TextField } from "@fluentui/react/lib/TextField"
 import { Dropdown, IDropdownOption } from "@fluentui/react/lib/Dropdown"
+
+import { pusher } from "../../pusher"
 
 import styles from "./style.module.css"
 
@@ -16,6 +19,11 @@ interface Participant {
   userName: string,
   enterAs: IDropdownOption | undefined
 }
+
+const channel = pusher.subscribe('chat');
+channel.bind('message', (data:any) => {
+  console.log(data)
+})
 
 export const NewRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
   const modalProps = React.useMemo(() => ({ isBlocking: true }), [])
@@ -44,7 +52,8 @@ export const NewRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
 
   const onSubmit = () => {
     console.log(participant)
-    toggleHideDialog()
+    axios.post('/message', participant)
+    // toggleHideDialog()
   }
 
   return (

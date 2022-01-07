@@ -1,0 +1,17 @@
+.banner {
+  margin: auto;
+  display: flex;
+}
+
+.bug {
+  font-size: 12rem;
+}
+
+.section {
+  margin-left: 2rem;
+}
+
+.msg {
+  margin: 5px 0 20px 0;
+}
+
