@@ -13,7 +13,7 @@ function Landing() {
   }
 
   return (
-    <>
+    <main>
       <div className="banner">
         <h1 className="ms-fontSize-68">Set up your planning poker for agile development</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -23,7 +23,7 @@ function Landing() {
         </form>
         <CreateRoom hideDialog={hideDialog} toggleHideDialog={toggleHideDialog}/>
       </div>
-    </>
+    </main>
   )
 }
 

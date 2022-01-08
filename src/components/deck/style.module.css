@@ -1,0 +1,31 @@
+.deck {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  margin: auto;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 50px;
+  height: 80px;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #a4373a;
+  user-select: none;
+}
+
+.card.selected .container {
+  color: #fff;
+  background-color: #a4373a;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  line-height: 80px;
+  color: #a4373a;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}

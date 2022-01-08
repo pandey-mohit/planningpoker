@@ -21,11 +21,18 @@ main {
   background-color: #fff;
   padding: 80px 0;
   justify-content: center;
+  margin-top: 20px;
 }
 
 .banner {
   width: 64rem;
+  /* padding-top: 5rem; */
 }
 /* .filler {
   flex-grow: 1;
+} */
+
+
+/* .ms-CommandBar {
+  padding-left: 0;
 } */

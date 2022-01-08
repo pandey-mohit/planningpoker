@@ -1,13 +1,23 @@
 .header {
   background-color: #ffffff;
-  padding: 16px 40px;
+  padding: 10px 40px;
   display: flex;
 }
 
 .heading {
-  line-height: 1;
+  color: #a4373a;
+  font-weight: bold;
 }
 
-.filler {
+.left-nav {
   flex: 1;
+}
+
+.left-nav .ms-CommandBar {
+  padding-left: 0;
+}
+
+.user {
+  border: 0;
+  margin-left: 10px;
 }

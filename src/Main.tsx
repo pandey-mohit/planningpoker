@@ -16,17 +16,15 @@ function Main() {
   return (
     <BrowserRouter>
       <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/room/:roomId" element={<Room />} />
-          <Route path="*" element={
-            <Suspense fallback={<></>}>
-              <Error />
-            </Suspense>
-          }/>
-        </Routes>
-      </main>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/room/:roomId" element={<Room />} />
+        <Route path="*" element={
+          <Suspense fallback={<></>}>
+            <Error />
+          </Suspense>
+        }/>
+      </Routes>
       {/* <Footer /> */}
     </BrowserRouter>
   )

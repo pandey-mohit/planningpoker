@@ -1,27 +1,23 @@
-import React from "react"
-import { matchPath } from "react-router-dom"
-import { PrimaryButton } from "@fluentui/react"
-import styles from "./style.module.css"
-import { CreateRoom } from "../createroom"
-import { useBoolean } from '@fluentui/react-hooks'
+import React, { useEffect, useState } from "react"
+import { Link, matchPath, useLocation } from "react-router-dom"
 
-const RightNav: React.FC = () => {
-  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
-  return (
-    <>
-      <PrimaryButton onClick={toggleHideDialog}>Start new room</PrimaryButton>
-      <CreateRoom hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} />
-    </>
-  )
-}
+import { LeftNav, RightNav } from "./navBar"
+import styles from "./style.module.css"
+
 
 export const Header: React.FC = () => {
-  const roomPage = matchPath("/room/:roomId", location.pathname)
+  let location = useLocation()
+  const [roomRoute, matchRoomRoute] = useState(matchPath("/room/:roomId", location.pathname))
+
+  useEffect(() => {
+    matchRoomRoute(matchPath("/room/:roomId", location.pathname))
+  }, [location])
+
   return (
     <header className={styles.header}>
       <span className={`ms-fontSize-28 ${styles.heading}`}>Scrum Pokermon</span>
-      <span className={styles.filler}></span>
-      { roomPage && <RightNav /> }
+      <LeftNav />
+      { roomRoute && <RightNav /> }
     </header>
   )
 }
