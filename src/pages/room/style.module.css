@@ -8,7 +8,7 @@
 }
 
 .panel {
-  border: 1px solid rgb(237, 235, 233);
+  border: 1px solid #dfe1e5;
   padding: 24px;
 }
 
@@ -28,4 +28,23 @@
 
 .filler {
   flex: 1;
+  display: flex;
+}
+
+.filler .participants {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #dfe1e5;
+  /* justify-content: space-between; */
+  margin-top: 10px;
+  padding: 10px;
+  max-width: 1162px;
+}
+
+.filler .result {
+  margin: 10px 0 0 10px;
+  padding: 40px;
+  border: 1px solid #dfe1e5;
+  text-align: center;
+  flex-grow: 1;
 }

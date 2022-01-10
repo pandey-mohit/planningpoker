@@ -1,3 +1,4 @@
+import { Text } from "@fluentui/react"
 import React from "react"
 
 import CARDS from "./cards.json"
@@ -31,8 +32,11 @@ export const Deck: React.FC<DeckProps> = ({ value, onClick }) => {
     return i
   })
   return (
-    <div className={styles.deck}>
-      { cards.map(i => <Card {...i} onClick={onClick} />)}
+    <div>
+      <p className="ms-fontSize-24" style={{ "textAlign": "center" }}>Cast your vote from here</p>
+      <div className={styles.deck}>
+        { cards.map((item, index) => <Card key={index} {...item} onClick={onClick} />)}
+      </div>
     </div>
   )
 }

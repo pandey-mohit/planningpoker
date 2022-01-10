@@ -5,11 +5,12 @@ import "./pokeball.css"
 interface Props {
   flip?: boolean,
   toggle?: boolean,
+  name?: string,
   onClick?: () => void
   children: JSX.Element | JSX.Element[]
 }
 
-export const FlipCard: React.FC<Props> = ({ children, flip=true, toggle, onClick }) => {
+export const FlipCard: React.FC<Props> = ({ children, flip=true, name, toggle, onClick }) => {
   return (
     <div className={`${styles.card} ${flip && toggle && styles.toggle}`} onClick={onClick}>
       <div className={styles.content}>
@@ -22,6 +23,7 @@ export const FlipCard: React.FC<Props> = ({ children, flip=true, toggle, onClick
           { children }
         </div>
       </div>
+      <div className={styles.name}>{name}</div>
     </div>
   )
 }

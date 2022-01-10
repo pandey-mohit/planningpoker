@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-// import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { Dialog, DialogFooter } from "@fluentui/react/lib/Dialog"
 import { PrimaryButton } from "@fluentui/react"
@@ -60,7 +59,7 @@ export const CreateRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) =>
       const { roomName, userName, enterAs } = participant
       const channelName = uniqueIdentifier().toString()
 
-      const { pubnub, uuid } = register()
+      const { pubnub, uuid } = register(userName)
       pubnub.subscribe({
         channels: [channelName]
       })
@@ -117,93 +116,34 @@ export const CreateRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) =>
   }
 
   return (
-    // <PubNubProvider client={pubnub}>
-      <Dialog
-        hidden={hideDialog}
-        onDismiss={toggleHideDialog}
-        dialogContentProps={{
-          title: "Create new room"
-        }}
-        modalProps={modalProps}
-        minWidth="480px"
-      >
-        <div className={styles.content}>
-          <TextField label="Room Name" name="roomName" required value={participant.roomName} onChange={onInputChange} errorMessage={error.roomName} />
-          <TextField label="Your Name" name="userName" required value={participant.userName} onChange={onInputChange} errorMessage={error.userName} />
-          <Dropdown
-            label="Enter as"
-            disabled={true}
-            selectedKey={ participant.enterAs }
-            onChange={onDropDownChange}
-            placeholder="Select an option"
-            options={[
-              { key: "participant", text: "Participant" },
-              { key: "host", text: "Host" },
-              { key: "spectator", text: "Spectator" }
-            ]}
-          />
-        </div>
-        {/* <PubNubProvider client={pubnub}>
-          <Chat />
-        </PubNubProvider> */}
-        <DialogFooter>
-          <PrimaryButton text="Start" onClick={onSubmit} />
-        </DialogFooter>
-      </Dialog>
-    // </PubNubProvider>
+    <Dialog
+      hidden={hideDialog}
+      onDismiss={toggleHideDialog}
+      dialogContentProps={{
+        title: "Create new room"
+      }}
+      modalProps={modalProps}
+      minWidth="480px"
+    >
+      <div className={styles.content}>
+        <TextField label="Room Name" name="roomName" required value={participant.roomName} onChange={onInputChange} errorMessage={error.roomName} />
+        <TextField label="Your Name" name="userName" required value={participant.userName} onChange={onInputChange} errorMessage={error.userName} />
+        <Dropdown
+          label="Enter as"
+          disabled={true}
+          selectedKey={ participant.enterAs }
+          onChange={onDropDownChange}
+          placeholder="Select an option"
+          options={[
+            { key: "participant", text: "Participant" },
+            { key: "host", text: "Host" },
+            { key: "spectator", text: "Spectator" }
+          ]}
+        />
+      </div>
+      <DialogFooter>
+        <PrimaryButton text="Start" onClick={onSubmit} />
+      </DialogFooter>
+    </Dialog>
   )
 }
-
-// function Chat() {
-//   const pubnub = usePubNub();
-//   const [channels] = useState(["awesome-channel"]);
-//   const [messages, addMessage] = useState([]);
-//   const [message, setMessage] = useState("");
-
-  const handleMessage = (event:any) => {
-    const message = event.message;
-    console.log("message received: ", message)
-    // if (typeof message === "string" || message.hasOwnProperty("text")) {
-    //   const text = message.text || message;
-    //   addMessage(messages => [...messages, text]);
-    // }
-  };
-
-//   const sendMessage = (message:any) => {
-//     if (message) {
-//       pubnub.subscribe({
-//         channels: ["my-test-app"]
-//     })
-      // pubnub
-      //   .publish({ channel: channels[0], message })
-      //   .then(() => setMessage(""))
-//     }
-//   };
-//   let count = 0
-//   // setTimeout(() => {
-//   //   count++
-//   //   sendMessage("test message: " + count)
-//   // })
-  
-//   // useEffect(() => {
-//   //   console.log("cellld")
-//   //   pubnub.addListener({ message: handleMessage })  
-//   //   pubnub.subscribe({ channels });
-//   //   pubnub.fetchMessages(
-//   //     {
-//   //         channels: channels,
-//   //         end: "15343325004275466",
-//   //         count: 100
-//   //     },
-//   //     (status, response) => {
-//   //         console.log("fetch", response)
-//   //     }
-//   // )
-//   // }, [pubnub, channels]);
-
-//   return (
-//     <div>
-//       dummmy content
-//     </div>
-//   );
-// }

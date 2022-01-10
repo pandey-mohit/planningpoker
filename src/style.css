@@ -36,3 +36,19 @@ main {
 /* .ms-CommandBar {
   padding-left: 0;
 } */
+
+.circle { 
+  height: 200px;
+  width: 200px; 
+  border-radius: 50%;
+  border: 2px solid #a4373a;
+  margin: 20px auto;
+}
+  
+.inner {
+  position: relative;
+  top: 50%;
+  color: #a4373a;
+  text-align: center;
+  line-height: 0px;
+}
