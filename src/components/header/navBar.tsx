@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { CommandBar, ICommandBarItemProps } from "@fluentui/react/lib/CommandBar"
 
 import styles from "./style.module.css"
+import { capitalize } from "../../util"
 
 export const LeftNav: React.FC = () => {
   const navigate = useNavigate()
@@ -41,7 +42,7 @@ export const RightNav: React.FC = () => {
     },
     {
       key: "user",
-      text: "User Name",
+      text: capitalize(JSON.parse(localStorage.getItem("user") || "{}").userName || "User Name"),
       iconProps: { iconName: "Contact" },
       subMenuProps: {
         items: [
@@ -58,6 +59,7 @@ export const RightNav: React.FC = () => {
 
   return (
     <CommandBar
+      className={styles["right-nav"]}
       items={items}
       ariaLabel="Use left and right arrow keys to navigate between commands"
     />

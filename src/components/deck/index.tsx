@@ -33,7 +33,7 @@ export const Deck: React.FC<DeckProps> = ({ value, onClick }) => {
   })
   return (
     <div>
-      <p className="ms-fontSize-24" style={{ "textAlign": "center" }}>Cast your vote from here</p>
+      <h2 className={styles.heading}>Cast your vote from here</h2>
       <div className={styles.deck}>
         { cards.map((item, index) => <Card key={index} {...item} onClick={onClick} />)}
       </div>

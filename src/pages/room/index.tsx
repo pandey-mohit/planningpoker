@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { DefaultButton, PrimaryButton } from "@fluentui/react"
+import { useBoolean } from "@fluentui/react-hooks"
 import { TextField } from "@fluentui/react/lib/TextField"
 import { Text } from "@fluentui/react/lib/Text"
 
@@ -8,20 +9,75 @@ import { register } from "../../pubnub"
 import { Deck } from "../../components/deck"
 import { FlipCard } from "../../components/flipcard"
 import styles from "./style.module.css"
+import { JoinRoom } from "../../components/joinroom"
+import PubNub from "pubnub"
 
-const { pubnub } = register("mohit")
+interface User {
+  userName?: string
+  enterAs?: string
+}
 
-const Room: React.FC = (props) => {
+const Page: React.FC = () => {
   const { roomId = "" } = useParams()
+  const navigate = useNavigate()
+  const [user, setUser] = useState<User>({})
+  const [isValidRoom, setValidRoom] = useState(true)
+
+  useEffect(() => {
+    if(!roomId || !Number(roomId)) {
+      return setValidRoom(false)
+    }
+    
+    const user = localStorage.getItem("user")
+    setUser(JSON.parse(user || "{}"))
+  }, [])
+
+  if(!isValidRoom) {
+    navigate("/")
+    return null
+  }
+
+  return (
+    <>
+      { user.userName ? <Room user={user} /> : <Login /> }
+    </>
+  )
+}
+
+const Login = () => {
+  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(false)
+  return (
+    <JoinRoom hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} />
+  )
+}
+
+interface RoomProps {
+  user: User
+}
+// interface Room {
+//   name: string
+//   owner: string
+// }
+const Room: React.FC<RoomProps> = ({ user }) => {
+  const { roomId = "" } = useParams()
+  const { pubnub } = register(user.userName)
+
+  let [room, setRoom] = useState({ name: "", owner: "" })
   let [participants, setParticipants] = useState<string[]>([])
+  let [votingInProgess, setVotingInProgress] = useState(false)
+
+  
+  let [task, setTask] = useState({ value: "", error: "" })
+  const onInputChange = (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>, newValue?: string) => {
+    setTask({
+      ...task,
+      value: newValue || ""
+    })
+  }
 
   const handleMessage = (event: any) => {
     const message = event.message
     console.log("message received: ", message)
-  }
-
-  const sendMessage = (message: any) => {
-    pubnub.publish({ channel: roomId.toString(), message })
   }
 
   const handlePresence = (event: any) => {
@@ -29,7 +85,32 @@ const Room: React.FC = (props) => {
     if(action === "join") {
       setParticipants(participants.concat([uuid]))
     }
-    // console.log("&&&& presence &&&: ", event)
+  }
+
+  const [showResult, setShowResult] = useState(false)
+  const startVoting = () => {
+    console.log("***")
+    if(!task.value) {
+      return setTask({ ...task, error: "Please enter the task details" })
+    }
+    setTask({ ...task, error: "" })
+    setVotingInProgress(true)
+    setShowResult(false)
+
+    // send message
+    pubnub.publish({
+      channel: roomId.toString(),
+      message: {
+        action: "start",
+        task: task.value
+      }
+    })
+  }
+
+  const endVoting = () => {
+    setTask({ value: "", error: "" })
+    setVotingInProgress(false)
+    setShowResult(true)
   }
 
   // component did mount
@@ -41,10 +122,15 @@ const Room: React.FC = (props) => {
       })
       pubnub.objects.getChannelMetadata({
         channel: roomId
-      }).then(({ status, data}) => {
+      }).then(({ status, data }) => {
         if(status === 200) {
-          console.log('Channel meta data: ', data)
-          const { name, custom } = data
+          console.log("Channel meta data: ", data)
+          let { name, custom } = data
+          let { owner = "" } = custom || {}
+          setRoom({
+            name: name || "",
+            owner: owner.toString()
+          })
           const channelName = name
         }
       })
@@ -55,9 +141,7 @@ const Room: React.FC = (props) => {
           includeUUIDs: true
         }, (status, response) => {
           const { occupants } = response.channels[roomId]
-          // console.log(occupants.map(i => i.uuid))
           setParticipants(occupants.map(i => i.uuid))
-          // console.log("herenow: ", status, response)
         }
       )
 
@@ -71,34 +155,37 @@ const Room: React.FC = (props) => {
     setSelected(value)
   }
 
-  const [toggle, setToggle] = useState(false)
-  const onClick = () => {
-    setToggle(!toggle)
-  }
   // console.log(participants)
   return (
     <main className={styles.room}>
       <div className={styles.panel}>
-        <TextField className={styles.input} placeholder="Enter task details" errorMessage="" />
-        <DefaultButton>Start Voting</DefaultButton>
+        <TextField
+          className={styles.input}
+          placeholder="Enter task details"
+          disabled={votingInProgess}
+          errorMessage={task.error}
+          value={task.value}
+          onChange={onInputChange}
+        />
+        <DefaultButton disabled={votingInProgess} onClick={startVoting}>Start Voting</DefaultButton>
         &nbsp;&nbsp;
-        <PrimaryButton>End Voting</PrimaryButton>
+        <PrimaryButton disabled={!votingInProgess} onClick={endVoting}>End Voting</PrimaryButton>
       </div>
       <div className={styles.filler}>
         <div className={styles.participants}>
-          { participants.concat(participants).concat(participants).concat(participants).concat(participants).concat(participants).map(item => <ParticipantCards key={item} uuid={item} toggle={toggle} onClick={onClick} />)}
+          { participants.map(item => <ParticipantCards key={item} uuid={item} show={showResult} />) }
         </div>
         <div className={styles.result}>
           <div>
-            <Text variant="large">Average</Text><br />
+            <h2 className={styles.heading}>Average</h2>
             <div className="circle">
-              <Text className="inner" variant="xxLarge">8</Text>
+              <span className="inner">8</span>
             </div>
           </div>
           <div>
-            <Text variant="large">Vote</Text><br />
+            <h2 className={styles.heading}>Vote</h2>
             <div className="circle">
-              <Text className="inner" variant="xxLarge">8 / 10</Text>
+              <span className="inner">8 / 10</span>
             </div>
           </div>
         </div>
@@ -110,8 +197,7 @@ const Room: React.FC = (props) => {
 
 interface ParticipantCardsProps {
   uuid: string,
-  toggle: boolean,
-  onClick: () => void
+  show: boolean
 }
 const ParticipantCards: React.FC<ParticipantCardsProps> = ({ uuid, ...restProps }) => {
   const arr = uuid.split("-")
@@ -123,4 +209,4 @@ const ParticipantCards: React.FC<ParticipantCardsProps> = ({ uuid, ...restProps 
   )
 }
 
-export default Room
+export default Page

@@ -3,17 +3,16 @@ import styles from "./style.module.css"
 import "./pokeball.css"
 
 interface Props {
-  flip?: boolean,
-  toggle?: boolean,
+  show: boolean,
   name?: string,
   onClick?: () => void
   children: JSX.Element | JSX.Element[]
 }
 
-export const FlipCard: React.FC<Props> = ({ children, flip=true, name, toggle, onClick }) => {
+export const FlipCard: React.FC<Props> = ({ children, name, show, onClick }) => {
   return (
-    <div className={`${styles.card} ${flip && toggle && styles.toggle}`} onClick={onClick}>
-      <div className={styles.content}>
+    <div className={`${styles.card} ${show ? styles.show : ""}`}>
+      <div className={styles.content} onClick={onClick}>
         <div className={styles.front}>
           {/* <div className="pokeball">
             <div className="pokeball-button"></div>
@@ -23,7 +22,7 @@ export const FlipCard: React.FC<Props> = ({ children, flip=true, name, toggle, o
           { children }
         </div>
       </div>
-      <div className={styles.name}>{name}</div>
+      { name && <div className={styles.name}>{name}</div> }
     </div>
   )
 }

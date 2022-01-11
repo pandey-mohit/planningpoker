@@ -6,8 +6,8 @@ import { useBoolean } from '@fluentui/react-hooks'
 import { CreateRoom } from "../../components/createroom"
 import styles from "./style.module.css"
 
-function Landing() {
-  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true);
+const Page = () => {
+  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
   const handleSubmit = () => {
     console.log("handle submit event")
   }
@@ -21,10 +21,10 @@ function Landing() {
           <DefaultButton>Join room</DefaultButton>
           <PrimaryButton onClick={toggleHideDialog}>Start new room</PrimaryButton>
         </form>
-        <CreateRoom hideDialog={hideDialog} toggleHideDialog={toggleHideDialog}/>
+        <CreateRoom hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} />
       </div>
     </main>
   )
 }
 
-export default Landing
+export default Page

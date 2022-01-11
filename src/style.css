@@ -38,11 +38,12 @@ main {
 } */
 
 .circle { 
-  height: 200px;
-  width: 200px; 
+  height: 160px;
+  width: 160px; 
   border-radius: 50%;
   border: 2px solid #a4373a;
-  margin: 20px auto;
+  margin: 10px auto 30px auto;
+  
 }
   
 .inner {
@@ -50,5 +51,7 @@ main {
   top: 50%;
   color: #a4373a;
   text-align: center;
-  line-height: 0px;
+  line-height: 0;
+  font-weight: bold;
+  font-size: 28px;
 }

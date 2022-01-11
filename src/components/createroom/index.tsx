@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Dialog, DialogFooter } from "@fluentui/react/lib/Dialog"
 import { PrimaryButton } from "@fluentui/react"
 import { TextField } from "@fluentui/react/lib/TextField"
@@ -10,6 +10,7 @@ import { uniqueIdentifier } from "../../util"
 import styles from "./style.module.css"
 
 interface Props {
+  room?: string
   hideDialog: boolean
   toggleHideDialog: ToggleHideDialog
 }
@@ -20,11 +21,13 @@ interface Participant {
   enterAs: string
 }
 
-export const CreateRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
+export const CreateRoom: React.FC<Props> = ({ room = "", hideDialog, toggleHideDialog }) => {
+  const { roomId } = useParams()
+  
   const modalProps = React.useMemo(() => ({ isBlocking: true }), [])
   const [ error, setError ] = React.useState({ roomName: "", userName: "" }) 
   const [participant, setParticipant] = React.useState<Participant>({
-    roomName: "",
+    roomName: room,
     userName: "",
     enterAs: "host"
   })
@@ -126,7 +129,9 @@ export const CreateRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) =>
       minWidth="480px"
     >
       <div className={styles.content}>
-        <TextField label="Room Name" name="roomName" required value={participant.roomName} onChange={onInputChange} errorMessage={error.roomName} />
+        { !roomId && (
+          <TextField label="Room Name" name="roomName" required value={participant.roomName} onChange={onInputChange} errorMessage={error.roomName} />
+        )}
         <TextField label="Your Name" name="userName" required value={participant.userName} onChange={onInputChange} errorMessage={error.userName} />
         <Dropdown
           label="Enter as"

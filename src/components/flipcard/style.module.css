@@ -1,23 +1,23 @@
 .card {
-  /* width: 100px;
-  height: 150px; */
+  width: 150px;
+  height: 231px;
   perspective: 500px;
   user-select:none;
-  cursor: pointer;
-  margin: 20px;
+  /* margin: 20px; */
 }
 
 .content {
-  width: 150px;
+  width: 100%;
   height: 200px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   border: 1px solid #a4373a;
   transition: transform 1s;
   transform-style: preserve-3d;
   margin: auto;
+  cursor: pointer;
 }
 
-.card.toggle .content {
+.card.show .content {
   transform: rotateY( 180deg ) ;
   transition: transform 1s;
 }

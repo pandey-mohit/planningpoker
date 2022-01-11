@@ -14,7 +14,7 @@
 
 .panel .input {
   width: 400px;
-  display: inline-block;
+  display: inline-table;
   margin-right: 20px;
 }
 
@@ -29,22 +29,34 @@
 .filler {
   flex: 1;
   display: flex;
+  margin-top: 10px;
 }
 
 .filler .participants {
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex;
+  flex-wrap: wrap; */
   border: 1px solid #dfe1e5;
   /* justify-content: space-between; */
-  margin-top: 10px;
-  padding: 10px;
-  max-width: 1162px;
+  margin-right: 10px;
+  /* padding: 10px;
+  max-width: 1142px; */
+  flex: 1;
+  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  /* justify-content: space-between; */
+  grid-gap: 40px;
+  padding: 20px;
 }
 
 .filler .result {
-  margin: 10px 0 0 10px;
-  padding: 40px;
+  padding: 20px;
   border: 1px solid #dfe1e5;
   text-align: center;
-  flex-grow: 1;
+  width: 400px;
+  /* flex-grow: 1; */
+}
+
+.filler .result .heading {
+  margin: 0;
 }
