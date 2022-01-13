@@ -40,6 +40,10 @@
   background: linear-gradient(355deg, rgba(116,23,26,1) 0%, rgba(164,55,58,1) 35%, rgba(246,109,113,1) 100%);
 }
 
+.content .front .done {
+  color: #fff;
+}
+
 .content .back {
   background: #fff;
   color: #a4373a;

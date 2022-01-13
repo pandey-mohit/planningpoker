@@ -9,13 +9,29 @@
 
 .panel {
   border: 1px solid #dfe1e5;
-  padding: 24px;
+  padding: 10px 24px 24px 24px;
+}
+
+.panel .myroom {
+  color: #a4373a;
+  text-transform: capitalize;
+  margin: 0 0 16px 0;
+}
+
+.panel .myroom .owner {
+  font-size: 14px;
+  text-transform: none;
 }
 
 .panel .input {
   width: 400px;
   display: inline-table;
   margin-right: 20px;
+}
+
+.panel .task {
+  font-size: 15px;
+  font-weight: bold;
 }
 
 /* .content > * {

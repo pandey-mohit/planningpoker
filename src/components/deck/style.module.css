@@ -11,7 +11,7 @@
 }
 
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
   transition: 0.3s;
   width: 50px;
   height: 80px;
@@ -21,10 +21,15 @@
   user-select: none;
 }
 
+.card.disabled .container {
+  opacity: 0.3;
+  cursor: initial;
+}
+
 .card.selected .container {
   color: #fff;
   background-color: #a4373a;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
 }
 
 .container {
