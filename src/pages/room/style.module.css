@@ -72,7 +72,11 @@
   width: 400px;
   /* flex-grow: 1; */
 }
+.filler .result .wrapper {
+  margin-bottom: 20px;
+}
 
-.filler .result .heading {
-  margin: 0;
+.filler .result .wrapper .heading {
+  margin-bottom: 10px;
+  line-height: 1;
 }

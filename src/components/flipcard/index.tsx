@@ -3,7 +3,7 @@ import styles from "./style.module.css"
 import "./pokeball.css"
 
 interface Props {
-  show: boolean,
+  show: boolean | undefined,
   name?: string,
   voted?: boolean,
   onClick?: () => void

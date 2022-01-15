@@ -4,10 +4,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Login } from "./login"
 import { Room } from "./room"
 
-interface User {
-  userName?: string
-  enterAs?: string
-}
 
 const Page: React.FC = () => {
   const { roomId = "" } = useParams()

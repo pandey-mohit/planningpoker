@@ -16,7 +16,7 @@ interface DeckProps {
   onClick: (value: string) => void
 }
 
-const Card: React.FC<CardProps> = ({ disabled, selected, value, onClick }) => {
+const Card: React.FC<CardProps> = ({ disabled = true, selected, value, onClick }) => {
   return (
     <div className={`${styles.card} ${disabled && styles.disabled} ${selected && styles.selected}`} onClick={() => !disabled && onClick(value)}>
       <div className={styles.container}>

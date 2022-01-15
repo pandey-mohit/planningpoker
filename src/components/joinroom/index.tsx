@@ -1,11 +1,11 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
 import { Dialog, DialogFooter } from "@fluentui/react/lib/Dialog"
 import { PrimaryButton } from "@fluentui/react"
 import { TextField } from "@fluentui/react/lib/TextField"
 import { Dropdown, IDropdownOption } from "@fluentui/react/lib/Dropdown"
 
 import styles from "./style.module.css"
-import { useNavigate } from "react-router-dom"
 
 interface Props {
   hideDialog: boolean

@@ -1,9 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useBoolean } from "@fluentui/react-hooks"
 import { CommandBar, ICommandBarItemProps } from "@fluentui/react/lib/CommandBar"
 
-import styles from "./style.module.css"
 import { capitalize } from "../../util"
+import { Invite } from "../invite"
+import styles from "./style.module.css"
+
 
 export const LeftNav: React.FC = () => {
   const navigate = useNavigate()
@@ -27,6 +30,7 @@ export const LeftNav: React.FC = () => {
 }
 
 export const RightNav: React.FC = () => {
+  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
   const navigate = useNavigate()
   const signout = () => {
     localStorage.clear()
@@ -38,7 +42,7 @@ export const RightNav: React.FC = () => {
       key: "invite",
       text: "Invite",
       iconProps: { iconName: "Share" },
-      onClick: () => console.log("Share"),
+      onClick: () => toggleHideDialog(),
     },
     {
       key: "user",
@@ -58,11 +62,14 @@ export const RightNav: React.FC = () => {
   ]
 
   return (
-    <CommandBar
-      className={styles["right-nav"]}
-      items={items}
-      ariaLabel="Use left and right arrow keys to navigate between commands"
-    />
+    <>
+      <CommandBar
+        className={styles["right-nav"]}
+        items={items}
+        ariaLabel="Use left and right arrow keys to navigate between commands"
+      />
+      <Invite hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} />
+    </>
   )
 }
 
