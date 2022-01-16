@@ -1,9 +1,18 @@
-.invite {
-}
-
 code {
   border: 1px solid #faf9f8;
   background-color: #eee;
   display: block;
   padding: 20px;
+}
+
+.copy {
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  font-weight: bold;
+}
+
+.copy.copied {
+  color: #107c10;
 }

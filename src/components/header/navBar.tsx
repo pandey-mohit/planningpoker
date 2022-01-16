@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import { useBoolean } from "@fluentui/react-hooks"
 import { CommandBar, ICommandBarItemProps } from "@fluentui/react/lib/CommandBar"
@@ -68,7 +68,7 @@ export const RightNav: React.FC = () => {
         items={items}
         ariaLabel="Use left and right arrow keys to navigate between commands"
       />
-      <Invite hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} />
+      { !hideDialog && <Invite hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} /> }
     </>
   )
 }
