@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { Dialog, DialogFooter } from "@fluentui/react/lib/Dialog"
 import { PrimaryButton } from "@fluentui/react"
@@ -81,40 +81,6 @@ export const CreateRoom: React.FC<Props> = ({ room = "", hideDialog, toggleHideD
 
       // navigate to room page
       navigate(`/room/${channelName}`)
-
-      /*
-      pubnub.publish({ channel: channelName.toString(), message: {
-          roomName: "edwd",
-          userName: "mohit",
-          enterAs: "host"
-        }
-      }).then((data) => {
-        console.log('@@@@@@@@@@@@@@@@', data)
-        pubnub.subscribe({
-          channels: ["my-test-app"]
-        })
-        pubnub.objects.setChannelMetadata({
-          channel: "my-test-app",
-          data: {
-            name: "my room",
-            description: "This channel is for company wide chatter.",
-            custom: { "owner": "mohit" }
-          }
-        })
-        pubnub.objects.getChannelMetadata({
-          channel: "my-test-app"
-        }).then( data => {
-          console.log('Channel meta data: ', data)
-        })
-      })
-      */
-      // pubnub.subscribe({
-      //   channels: ["my-test-app"]
-      // })
-      // create the channel
-      // pubnub.publish({ channel: roomName })
-      // pubnub.publish({ channel: roomName, message: participant })
-      console.log("call the api")
     }
   }
 

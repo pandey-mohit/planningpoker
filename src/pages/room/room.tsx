@@ -43,7 +43,6 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
       channel: roomId
     }).then(({ status, data }) => {
       if(status === 200) {
-        console.log("Channel meta data: ", data)
         let { name, custom } = data
         let { owner = "" } = custom || {}
         setRoom({
