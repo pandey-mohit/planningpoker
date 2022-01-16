@@ -4,7 +4,7 @@ import { initializeIcons } from "@fluentui/font-icons-mdl2"
 import Landing from "./pages/landing"
 import Room from "./pages/room"
 import { Header } from "./components/header"
-import { Footer } from "./components/footer"
+// import { Footer } from "./components/footer"
 
 // initialize icons
 initializeIcons()
