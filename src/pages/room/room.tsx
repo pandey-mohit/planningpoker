@@ -21,17 +21,23 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
   
   let [participants, dispatch] = useReducer((prevState:ParticipantProps, action:ParticipantAction) => {
     const { type, obj } = action
+    let state = { ...prevState }
     switch (type) {
       case "add":
-        return { ...prevState, ...obj }
+        return { ...state, ...obj }
+      case "leave":
+        let id = (obj || {}).uuid
+        if(id && id !== uuid) {
+          delete state[(obj || {}).uuid]
+        }
+        return state
       case "reset":
-        let state = { ...prevState }
         Object.keys(state).forEach(i => state[i] = "")
         return state
       default:
-        return prevState
+        return state
     }
-  }, {})
+  }, uuid ? { [uuid]: "" } : {})
 
    // component did mount
    useEffect(() => {
@@ -53,15 +59,21 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
     })
     pubnub.addListener({ message: handleMessage, presence: handlePresence })
     pubnub.hereNow({
-        channels: [roomId],
-        // includeState: true,
-        includeUUIDs: true
-      }, (status, response) => {
-        const { occupants } = response.channels[roomId]
-        let obj = occupants.reduce((accum:object, curr) => ({ ...accum, [`${curr.uuid}`]: "" }), {})
-        dispatch({ type: "add", obj })
-      }
-    )
+      channels: [roomId],
+      // includeState: true,
+      includeUUIDs: true
+    }, (status, response) => {
+      const { occupants } = response.channels[roomId]
+      let obj = occupants.reduce((accum:object, curr) => ({ ...accum, [`${curr.uuid}`]: "" }), {})
+      dispatch({ type: "add", obj })
+    })
+    // }, 1000)
+    
+    window.addEventListener("beforeunload", (onUnload))
+    return () => {
+      onUnload()
+      window.removeEventListener("beforeunload", onUnload)
+    }
   }, [])
 
   // effect to check showResult change to update the stats
@@ -79,7 +91,7 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
         }
       }
       setStats({
-        average: arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0,
+        average: arr.length ? Math.round(arr.reduce((a, b) => a + b, 0) * 10 / arr.length) / 10 : 0,
         voted: arr.length
       })
     }
@@ -106,9 +118,17 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
   // on presence event
   const handlePresence = (event: any) => {
     const { action, uuid } = event
-    if(action === "join") {
-      dispatch({ type: "add", obj: { [uuid]: "" } })
+    switch( action) {
+      case "join":
+        return dispatch({ type: "add", obj: { [uuid]: "" } })
+      case "leave":
+        return dispatch({ type: "leave", obj: { uuid: uuid } })
+
     }
+  }
+
+  const onUnload = () => {
+    pubnub.unsubscribe({ channels: [roomId] })
   }
 
   // start voting
