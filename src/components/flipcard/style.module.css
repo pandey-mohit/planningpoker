@@ -10,7 +10,7 @@
   width: 100%;
   height: 200px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  border: 1px solid #a4373a;
+  border: 1px solid var(--primary-color);
   transition: transform 1s;
   transform-style: preserve-3d;
   margin: auto;
@@ -29,15 +29,15 @@
   width: 100%;
   /* background: white; */
   line-height: 200px;
-  color: #a4373a;
+  color: var(--primary-color);
   font-weight: bold;
   text-align: center;
   font-size: 24px;
   
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   backface-visibility: hidden;
-  background: rgb(116,23,26);
-  background: linear-gradient(355deg, rgba(116,23,26,1) 0%, rgba(164,55,58,1) 35%, rgba(246,109,113,1) 100%);
+  /* background: linear-gradient(355deg, rgba(116,23,26,1) 0%, rgba(164,55,58,1) 35%, rgba(246,109,113,1) 100%); */
+  background: linear-gradient(90deg,#2c3a88,#0061c8 69%);
 }
 
 .content .front .done {
@@ -46,14 +46,14 @@
 
 .content .back {
   background: #fff;
-  color: #a4373a;
+  color: var(--primary-color);
   transform: rotateY( 180deg );
 }
 
 .card .name {
   text-align: center;
   text-transform: capitalize;
-  color: #a4373a;
+  color: var(--primary-color);
   font-size: 16px;
   font-weight: 600;
   padding-top: 10px;

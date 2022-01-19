@@ -5,39 +5,33 @@ import { CommandBar, ICommandBarItemProps } from "@fluentui/react/lib/CommandBar
 
 import { capitalize } from "../../util"
 import { Invite } from "../invite"
-import styles from "./style.module.css"
+import "./style.css"
 
-
-export const LeftNav: React.FC = () => {
+interface NavBarProps {
+  rightNav: boolean
+}
+export const NavBar: React.FC<NavBarProps> = ({ rightNav }) => {
+  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
   const navigate = useNavigate()
   const navigateToHome = () => {
     navigate("/")
   }
 
-  return (
-    <CommandBar
-      items={[
-        {
-          key: "home",
-          text: "Home",
-          onClick: navigateToHome,
-        }
-      ]}
-      ariaLabel="Use left and right arrow keys to navigate between commands"
-      className={styles["left-nav"]}
-    />
-  )
-}
-
-export const RightNav: React.FC = () => {
-  const [hideDialog, { toggle: toggleHideDialog }] = useBoolean(true)
-  const navigate = useNavigate()
   const signout = () => {
     localStorage.clear()
     navigate("/")
   }
 
-  const items: ICommandBarItemProps[] = [
+  const leftItems: ICommandBarItemProps[] = [
+    {
+      key: "home",
+      text: "Home",
+      ariaLabel: 'Grid view',
+      onClick: navigateToHome,
+    }
+  ]
+
+  const rightItems: ICommandBarItemProps[] = [
     {
       key: "invite",
       text: "Invite",
@@ -59,16 +53,16 @@ export const RightNav: React.FC = () => {
         ],
       },
     }
-  ]
-
+  ] 
   return (
     <>
       <CommandBar
-        className={styles["right-nav"]}
-        items={items}
+        items={leftItems}
+        farItems={rightNav ? rightItems : []}
         ariaLabel="Use left and right arrow keys to navigate between commands"
+        className="navbar"
       />
-      { !hideDialog && <Invite hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} /> }
+      { rightNav && !hideDialog && <Invite hideDialog={hideDialog} toggleHideDialog={toggleHideDialog} /> }
     </>
   )
 }

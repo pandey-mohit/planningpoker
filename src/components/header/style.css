@@ -4,22 +4,23 @@
   display: flex;
 }
 
-.heading {
-  color: #a4373a;
+.header .heading {
+  color: var(--primary-color);
   font-weight: bold;
 }
 
-.left-nav {
+.header .navbar {
   flex: 1;
 }
 
-.left-nav .ms-CommandBar {
+/* .header .ms-CommandBar {
   padding-left: 0;
-}
+} */
 
-.right-nav {
+
+/* .right-nav {
   background-color: red;
-}
+} */
 /* .user {
   border: 0;
   margin-left: 10px;

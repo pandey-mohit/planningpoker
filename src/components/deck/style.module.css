@@ -17,7 +17,7 @@
   height: 80px;
   display: inline-block;
   text-align: center;
-  border: 1px solid #a4373a;
+  border: 1px solid var(--primary-color);
   user-select: none;
 }
 
@@ -28,13 +28,13 @@
 
 .card.selected .container {
   color: #fff;
-  background-color: #a4373a;
+  background-color: var(--primary-color);
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
 }
 
 .container {
   line-height: 80px;
-  color: #a4373a;
+  color: var(--primary-color);
   font-size: 18px;
   font-weight: bold;
   cursor: pointer;

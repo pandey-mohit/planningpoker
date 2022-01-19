@@ -13,7 +13,7 @@
 }
 
 .panel .myroom {
-  color: #a4373a;
+  color: var(--primary-color);
   text-transform: capitalize;
   margin: 0 0 16px 0;
 }
@@ -79,4 +79,23 @@
 .filler .result .wrapper .heading {
   margin-bottom: 10px;
   line-height: 1;
+  color: var(--primary-color);
+}
+
+.filler .result .wrapper .circle { 
+  height: 160px;
+  width: 160px; 
+  border-radius: 50%;
+  border: 2px solid var(--secondary-color);
+  margin: auto;
+}
+  
+.filler .result .wrapper .inner {
+  position: relative;
+  top: 50%;
+  color: var(--secondary-color);
+  text-align: center;
+  line-height: 0;
+  font-weight: bold;
+  font-size: 28px;
 }

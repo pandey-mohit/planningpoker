@@ -1,9 +1,23 @@
+:root {
+  /* --primary-color: #a4373a; */
+  --primary-color: #0a70e3;
+  --secondary-color: #33cd00;
+  --light-grey: #faf9f8;
+}
+
+/* fluentui override */
+.ms-Button--commandBar:hover {
+  background-color: rgb(243, 242, 241);
+  color: rgb(32, 31, 30);
+}
+
+
 html, body {
   height: 100%;
 }
 
 body {
-  background-color: #faf9f8;
+  background-color: var(--light-grey);
   padding: 0;
   margin: 0;
 }
@@ -26,32 +40,4 @@ main {
 
 .banner {
   width: 64rem;
-  /* padding-top: 5rem; */
-}
-/* .filler {
-  flex-grow: 1;
-} */
-
-
-/* .ms-CommandBar {
-  padding-left: 0;
-} */
-
-.circle { 
-  height: 160px;
-  width: 160px; 
-  border-radius: 50%;
-  border: 2px solid #a4373a;
-  margin: auto;
-  
-}
-  
-.inner {
-  position: relative;
-  top: 50%;
-  color: #a4373a;
-  text-align: center;
-  line-height: 0;
-  font-weight: bold;
-  font-size: 28px;
 }

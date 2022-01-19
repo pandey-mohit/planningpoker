@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Link, matchPath, useLocation } from "react-router-dom"
 
-import { LeftNav, RightNav } from "./navBar"
-import styles from "./style.module.css"
+import { NavBar } from "./navBar"
+import "./style.css"
 
 
 export const Header: React.FC = () => {
@@ -11,13 +11,13 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     matchRoomRoute(matchPath("/room/:roomId", location.pathname))
+    console.log(roomRoute)
   }, [location])
 
   return (
-    <header className={styles.header}>
-      <span className={`ms-fontSize-28 ${styles.heading}`}>Scrum Pokermon</span>
-      <LeftNav />
-      { roomRoute && <RightNav /> }
+    <header className="header">
+      <span className="ms-fontSize-28 heading">Scrum Pokermon</span>
+      <NavBar rightNav={!!roomRoute} />
     </header>
   )
 }
