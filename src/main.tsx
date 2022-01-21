@@ -13,27 +13,7 @@ initializeIcons()
 const myTheme = createTheme({
   palette: {
     themePrimary: '#0a70e3',
-    themeLighterAlt: '#f4f9fe',
-    themeLighter: '#d4e6fb',
-    themeLight: '#b0d1f7',
-    themeTertiary: '#65a5ee',
-    themeSecondary: '#247fe6',
-    themeDarkAlt: '#0864cc',
-    themeDark: '#0754ac',
-    themeDarker: '#053e7f',
-    neutralLighterAlt: '#ffffff',
-    neutralLighter: '#ffffff',
-    neutralLight: '#ffffff',
-    neutralQuaternaryAlt: '#ffffff',
-    neutralQuaternary: '#ffffff',
-    neutralTertiaryAlt: '#ffffff',
-    neutralTertiary: '#a19f9d',
-    neutralSecondary: '#605e5c',
-    neutralPrimaryAlt: '#3b3a39',
-    neutralPrimary: '#323130',
-    neutralDark: '#201f1e',
-    black: '#000000',
-    white: '#ffffff',
+    themeDarkAlt: '#0864cc'
   }})
 
 // lazy loading module

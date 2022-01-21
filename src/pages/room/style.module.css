@@ -8,12 +8,13 @@
 }
 
 .panel {
-  border: 1px solid #dfe1e5;
   padding: 10px 24px 24px 24px;
+  background-color: var(--light-grey);
+  border: 1px solid var(--dark-grey);
 }
 
 .panel .myroom {
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
   text-transform: capitalize;
   margin: 0 0 16px 0;
 }
@@ -29,18 +30,14 @@
   margin-right: 20px;
 }
 
+input:disabled {
+  font-weight: bold;
+}
+
 .panel .task {
   font-size: 15px;
   font-weight: bold;
 }
-
-/* .content > * {
-  padding-bottom: 10px;
-}
-.panel.disable {
-  pointer-events: none;
-  opacity: 0.4;
-} */
 
 .filler {
   flex: 1;
@@ -51,7 +48,7 @@
 .filler .participants {
   /* display: flex;
   flex-wrap: wrap; */
-  border: 1px solid #dfe1e5;
+  border: 1px solid var(--dark-grey);
   /* justify-content: space-between; */
   margin-right: 10px;
   /* padding: 10px;
@@ -67,7 +64,7 @@
 
 .filler .result {
   padding: 20px;
-  border: 1px solid #dfe1e5;
+  border: 1px solid var(--dark-grey);
   text-align: center;
   width: 400px;
   /* flex-grow: 1; */
