@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link, matchPath, useLocation } from "react-router-dom"
+import { matchPath, useLocation } from "react-router-dom"
 
 import { NavBar } from "./navBar"
 import "./style.css"
@@ -11,7 +11,6 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     matchRoomRoute(matchPath("/room/:roomId", location.pathname))
-    console.log(roomRoute)
   }, [location])
 
   return (

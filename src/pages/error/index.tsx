@@ -1,8 +1,9 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import { PrimaryButton } from "@fluentui/react"
 import { FontIcon } from "@fluentui/react/lib/Icon"
 import styles from "./style.module.css"
+
 
 const Error: React.FC = (props) => {
   let navigate = useNavigate()

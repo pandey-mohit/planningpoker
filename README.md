@@ -1,2 +1,21 @@
-# planningpoker
-planningpoker is a consensus-based, gamified technique for estimating the tasks in agile methodology. 
+# planningpoker (scrum pokermon)
+Planningpoker (Scrum Pokermon) is a consensus-based, gamified technique for estimating the tasks in agile methodology.
+
+## Tech Stack
+1. [ReactJS](https://reactjs.org/docs/create-a-new-react-app.html), for front end application
+2. [FluentUI](https://developer.microsoft.com/en-us/fluentui) for ux and component styling
+3. [PubNub](https://www.pubnub.com) for chat api
+
+
+## Getting Started
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+In order to run the project, please run the following commands:
+```
+# install the node dependencies
+npm install
+# start the project in development mode
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) to view it in browser.

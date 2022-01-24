@@ -1,11 +1,11 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
 import { Dialog, DialogFooter } from "@fluentui/react/lib/Dialog"
 import { PrimaryButton } from "@fluentui/react"
 import { TextField } from "@fluentui/react/lib/TextField"
 import { Dropdown, IDropdownOption } from "@fluentui/react/lib/Dropdown"
 
 import styles from "./style.module.css"
+
 
 interface Props {
   hideDialog: boolean
@@ -48,7 +48,6 @@ export const JoinRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
     return !error.userName
   }
 
-  const navigate = useNavigate()
   const onSubmit = () => {
     if(validate()) {
       localStorage.setItem("user", JSON.stringify(participant))

@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useState } from "react"
 import { MessageBar, MessageBarType } from "@fluentui/react"
 import { Dialog } from "@fluentui/react/lib/Dialog"
 import { FontIcon } from "@fluentui/react/lib/Icon"
 
 import styles from "./style.module.css"
+
 
 interface Props {
   hideDialog: boolean

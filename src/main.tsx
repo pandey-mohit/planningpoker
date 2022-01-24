@@ -21,7 +21,7 @@ const Error = React.lazy(() => import("./pages/error"))
 
 function Main() {
   return (
-    <ThemeProvider applyTo='body' theme={myTheme}>
+    <ThemeProvider applyTo='body' theme={myTheme} className="theme-provider">
       <BrowserRouter>
         <Header />
         <Routes>

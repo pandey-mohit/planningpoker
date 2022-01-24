@@ -59,10 +59,10 @@ export const CreateRoom: React.FC<Props> = ({ room = "", hideDialog, toggleHideD
   const navigate = useNavigate()
   const onSubmit = () => {
     if(validate()) {
-      const { roomName, userName, enterAs } = participant
+      const { roomName, userName } = participant
       const channelName = uniqueIdentifier().toString()
 
-      const { pubnub, uuid } = register(userName)
+      const { pubnub } = register(userName)
       pubnub.subscribe({
         channels: [channelName]
       })
