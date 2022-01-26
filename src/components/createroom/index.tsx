@@ -61,23 +61,24 @@ export const CreateRoom: React.FC<Props> = ({ room = "", hideDialog, toggleHideD
     if(validate()) {
       const { roomName, userName } = participant
       const channelName = uniqueIdentifier().toString()
-
-      const { pubnub } = register(userName)
-      pubnub.subscribe({
-        channels: [channelName]
-      })
+      const { pubnub } = register(participant, channelName)
+      
+      // pubnub.subscribe({
+      //   channels: [channelName]
+      // })
+      
       pubnub.objects.setChannelMetadata({
         channel: channelName,
         data: {
           name: roomName,
-          description: "This channel is for company wide chatter.",
+          description: "This channel is for scrum planning.",
           custom: { "owner": userName }
         }
       })
-      localStorage.setItem("user", JSON.stringify({
-        ...participant,
-        channelName
-      }))
+      // localStorage.setItem("user", JSON.stringify({
+      //   ...participant,
+      //   channelName
+      // }))
 
       // navigate to room page
       navigate(`/room/${channelName}`)

@@ -8,7 +8,7 @@ import { Room } from "./room"
 const Page: React.FC = () => {
   const { roomId = "" } = useParams()
   const navigate = useNavigate()
-  const [user, setUser] = useState<User>({})
+  // const [user, setUser] = useState<User>({})
   const [isValidRoom, setValidRoom] = useState(true)
 
   useEffect(() => {
@@ -16,8 +16,8 @@ const Page: React.FC = () => {
       return setValidRoom(false)
     }
     
-    const user = localStorage.getItem("user")
-    setUser(JSON.parse(user || "{}"))
+    // const user = localStorage.getItem("uuid")
+    // setUser(JSON.parse(user || "{}"))
   }, [])
 
   if(!isValidRoom) {
@@ -27,7 +27,7 @@ const Page: React.FC = () => {
 
   return (
     <>
-      { user.userName ? <Room user={user} /> : <Login /> }
+      { localStorage.getItem("uuid") ? <Room /> : <Login /> }
     </>
   )
 }

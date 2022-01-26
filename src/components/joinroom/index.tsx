@@ -4,6 +4,7 @@ import { PrimaryButton } from "@fluentui/react"
 import { TextField } from "@fluentui/react/lib/TextField"
 import { Dropdown, IDropdownOption } from "@fluentui/react/lib/Dropdown"
 
+import { register } from "../../pubnub"
 import styles from "./style.module.css"
 
 
@@ -50,7 +51,8 @@ export const JoinRoom: React.FC<Props> = ({ hideDialog, toggleHideDialog }) => {
 
   const onSubmit = () => {
     if(validate()) {
-      localStorage.setItem("user", JSON.stringify(participant))
+      // localStorage.setItem("user", JSON.stringify(participant))
+      register(participant)
       window.location.reload()
     }
   }

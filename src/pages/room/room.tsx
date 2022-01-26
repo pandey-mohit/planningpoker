@@ -8,43 +8,61 @@ import { Result } from "./section/result"
 import { TaskBar } from "./section/taskbar"
 import styles from "./style.module.css"
 
-
-export const Room: React.FC<RoomProps> = ({ user }) => {
-  const { roomId = "" } = useParams()
-  const { pubnub } = register(user.userName)
-  const uuid = localStorage.getItem("uuid")
-
-  let [room, setRoom] = useState({ name: "", owner: "" })
-  let [taskValue, setTaskValue] = useState("")
-  let [showResult, setShowResult] = useState<boolean | undefined>(undefined)
-  let [stats, setStats] = useState<StatsProps>({})
-  
-  let [participants, dispatch] = useReducer((prevState:ParticipantProps, action:ParticipantAction) => {
+// participant reducer
+const reducer = (uuid:string) => {
+  return (prevState:ParticipantProps, action:ParticipantAction) => {
     const { type, obj } = action
     let state = { ...prevState }
     switch (type) {
       case "add":
         return { ...state, ...obj }
       case "leave":
-        let id = (obj || {}).uuid
+        let id = ((obj || {}).uuid).toString()
         if(id && id !== uuid) {
-          delete state[(obj || {}).uuid]
+          delete state[id]
         }
         return state
       case "reset":
-        Object.keys(state).forEach(i => state[i] = "")
+        Object.keys(state).forEach(i => state[i] = { ...state[i], value: "" })
         return state
       default:
         return state
     }
-  }, uuid ? { [uuid]: "" } : {})
+  }
+}
 
-   // component did mount
-   useEffect(() => {
+export const Room: React.FC = () => {
+  const { roomId = "" } = useParams()
+  const { pubnub } = register()
+  const uuid = localStorage.getItem("uuid") || ""
+
+  let [user, setUser] = useState<User>({})
+  let [room, setRoom] = useState({ name: "", owner: "" })
+  let [taskValue, setTaskValue] = useState("")
+  let [showResult, setShowResult] = useState<boolean | undefined>(undefined)
+  let [stats, setStats] = useState<StatsProps>({})
+  
+  let [participants, dispatch] = useReducer(reducer(uuid), {})
+
+  const getUser = async () => {
+    let { data } = await pubnub.objects.getUUIDMetadata()
+    let { name, custom } = data
+    setUser({
+      userName: (name || "").toString(),
+      enterAs: custom ? custom.enterAs.toString() : "participant"
+    })
+  }
+
+  // component did mount
+  useEffect(() => {
     pubnub.subscribe({
       channels: [roomId],
       withPresence: true
     })
+
+    // get user details
+    getUser()
+    
     pubnub.objects.getChannelMetadata({
       channel: roomId
     }).then(({ status, data }) => {
@@ -57,18 +75,29 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
         })
       }
     })
+  
     pubnub.addListener({ message: handleMessage, presence: handlePresence })
     pubnub.hereNow({
       channels: [roomId],
-      // includeState: true,
-      includeUUIDs: true
+      includeUUIDs: true,
+      includeState: true
     }, (status, response) => {
       const { occupants } = response.channels[roomId]
-      let obj = occupants.reduce((accum:object, curr) => ({ ...accum, [`${curr.uuid}`]: "" }), {})
-      dispatch({ type: "add", obj })
+      let obj = {} as ParticipantProps
+      (async () => {
+        for(let i = 0;  i < occupants.length; i++) {
+          let { uuid = "" } = occupants[i]
+          let { status, data } = await pubnub.objects.getUUIDMetadata({ uuid })
+          obj[uuid] = {
+            name: status === 200 ? (data.name || "") : "",
+            value: ""
+          }
+          dispatch({ type: "add", obj })
+        }
+      })()
     })
-    // }, 1000)
-    
+
+    // add unload event
     window.addEventListener("beforeunload", (onUnload))
     return () => {
       onUnload()
@@ -81,7 +110,7 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
     if(showResult) {
       let arr = []
       // let unanwsered = 0
-      for (const [key, value] of Object.entries(participants)) {
+      for (const [key, { value }] of Object.entries(participants)) {
         if(value) {
           if (isNaN(Number(value))) {
             // unanwsered += 0
@@ -116,14 +145,15 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
   }
 
   // on presence event
-  const handlePresence = (event: any) => {
+  const handlePresence = async (event: any) => {
     const { action, uuid } = event
+    let { data } = await pubnub.objects.getUUIDMetadata({ uuid })
     switch( action) {
       case "join":
-        return dispatch({ type: "add", obj: { [uuid]: "" } })
+        // TODO - MOHIT PANDEY
+        return dispatch({ type: "add", obj: { [uuid]: { name: (data.name || "").toString(), value: "" } } })
       case "leave":
         return dispatch({ type: "leave", obj: { uuid: uuid } })
-
     }
   }
 
@@ -155,7 +185,7 @@ export const Room: React.FC<RoomProps> = ({ user }) => {
     setMyVote(value)
     pubnub.publish({
       channel: roomId.toString(),
-      message: { action: "vote", value, uuid}
+      message: { action: "vote", uuid: uuid, value: { name: user.userName, value: value }}
     })
 
   }

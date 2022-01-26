@@ -3,12 +3,18 @@ interface User {
   enterAs?: string
 }
 
-interface RoomProps {
-  user: User
+// interface RoomProps {
+//   user: User
+// }
+
+interface ParticipantUUIDProps {
+  name?: string
+  value?: string
+  uuid?: string
 }
 
 interface ParticipantProps {
-  [key: string]: string
+  [key: string]: ParticipantUUIDProps
 }
 
 interface ParticipantAction {
@@ -28,7 +34,7 @@ interface ParticipantCardsProps {
 
 interface ParticipantCardProps {
   uuid: string,
-  value: string,
+  item: ParticipantUUIDProps,
   show: boolean | undefined
 }
 
