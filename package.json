@@ -2,7 +2,6 @@
   "name": "planningpoker",
   "version": "0.1.0",
   "description": "Planningpoker (Scrum Pokermon) is a consensus-based, gamified technique for estimating the tasks in agile methodology.",
-  "homepage": "https://github.com/pandey-mohit/planningpoker",
   "private": true,
   "dependencies": {
     "@fluentui/react": "^8.48.1",
@@ -26,7 +25,6 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build:prod": "dotenv -e .env.prod react-scripts build",
