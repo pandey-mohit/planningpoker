@@ -4,7 +4,7 @@
   "description": "Planningpoker (Scrum Pokermon) is a consensus-based, gamified technique for estimating the tasks in agile methodology.",
   "private": true,
   "dependencies": {
-    "@fluentui/react": "^8.48.1",
+    "@fluentui/react": "8.98.7",
     "@fluentui/react-icons-mdl2": "^1.2.11",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
