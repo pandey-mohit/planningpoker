@@ -53,6 +53,6 @@
     "postcss": "^8.2.10"
   },
   "devDependencies": {
-    "dotenv-cli": "^4.1.1"
+    "dotenv-cli": "^6.0.0"
   }
 }
