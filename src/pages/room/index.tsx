@@ -18,7 +18,7 @@ const Page: React.FC = () => {
     
     const user = localStorage.getItem("user")
     setUser(JSON.parse(user || "{}"))
-  }, [])
+  }, [roomId])
 
   if(!isValidRoom) {
     navigate("/")
