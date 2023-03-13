@@ -13,25 +13,59 @@ pool:
 steps:
 - template: baseline.yml@templates
 
-- task: trivy@1
-  inputs:
-    image: moby/buildkit
-    exitCode: 0
-  # continueOnError: true
-
-- script: |
-    echo "#################"
-    FILES=$(find /tmp/ -name "trivy-results-*.json")
-    echo "#################"
-    echo "##vso[task.setvariable variable=myVar;]$FILES"
-    echo "##vso[task.addattachment type=consolidated-scan-results;name=aqua-scan-results.json;]$FILES"
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: $(myVar)
-    ArtifactName: CodeAnalysisLogs
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# - task: trivy@1
+#   inputs:
+#     image: moby/buildkit
+#     exitCode: 0
+#   # continueOnError: true
+
+# - script: |
+#     echo "#################"
+#     FILES=$(find /tmp/ -name "trivy-results-*.json")
+#     echo "#################"
+#     echo "##vso[task.setvariable variable=myVar;]$FILES"
+#     echo "##vso[task.addattachment type=consolidated-scan-results;name=aqua-scan-results.json;]$FILES"
+
+# - task: PublishBuildArtifacts@1
+#   inputs:
+#     PathtoPublish: $(myVar)
+#     ArtifactName: CodeAnalysisLogs
 
 
 # - task: PublishBuildArtifacts@1
