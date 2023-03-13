@@ -1,0 +1,458 @@
+{
+    "check_type": "dockerfile",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CKV_DOCKER_11",
+                "bc_check_id": "BC_DKR_GENERAL_9",
+                "check_name": "Ensure From Alias are unique for multistage builds.",
+                "check_result": {
+                    "result": "PASSED",
+                    "results_configuration": null
+                },
+                "code_block": [
+                    [
+                        1,
+                        "FROM komljen/ubuntu\n"
+                    ],
+                    [
+                        2,
+                        "MAINTAINER Alen Komljen <alen.komljen@live.com>\n"
+                    ],
+                    [
+                        3,
+                        "\n"
+                    ],
+                    [
+                        4,
+                        "RUN \\\n"
+                    ],
+                    [
+                        5,
+                        "  add-apt-repository -y ppa:chris-lea/node.js && \\\n"
+                    ],
+                    [
+                        6,
+                        "  apt-get update && \\\n"
+                    ],
+                    [
+                        7,
+                        "  apt-get -y install \\\n"
+                    ],
+                    [
+                        8,
+                        "          nodejs && \\\n"
+                    ],
+                    [
+                        9,
+                        "  rm -rf /var/lib/apt/lists/*"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    1,
+                    9
+                ],
+                "resource": "/Dockerfile.",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.AliasIsUnique",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-docker-from-alias-is-unique-for-multistage-builds"
+            },
+            {
+                "check_id": "CKV_DOCKER_5",
+                "bc_check_id": "BC_DKR_4",
+                "check_name": "Ensure update instructions are not use alone in the Dockerfile",
+                "check_result": {
+                    "result": "PASSED",
+                    "results_configuration": null
+                },
+                "code_block": [
+                    [
+                        1,
+                        "FROM komljen/ubuntu\n"
+                    ],
+                    [
+                        2,
+                        "MAINTAINER Alen Komljen <alen.komljen@live.com>\n"
+                    ],
+                    [
+                        3,
+                        "\n"
+                    ],
+                    [
+                        4,
+                        "RUN \\\n"
+                    ],
+                    [
+                        5,
+                        "  add-apt-repository -y ppa:chris-lea/node.js && \\\n"
+                    ],
+                    [
+                        6,
+                        "  apt-get update && \\\n"
+                    ],
+                    [
+                        7,
+                        "  apt-get -y install \\\n"
+                    ],
+                    [
+                        8,
+                        "          nodejs && \\\n"
+                    ],
+                    [
+                        9,
+                        "  rm -rf /var/lib/apt/lists/*"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    1,
+                    9
+                ],
+                "resource": "/Dockerfile.",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.UpdateNotAlone",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-update-instructions-are-not-used-alone-in-the-dockerfile"
+            },
+            {
+                "check_id": "CKV_DOCKER_9",
+                "bc_check_id": "BC_DKR_NETWORKING_1",
+                "check_name": "Ensure that APT isn't used",
+                "check_result": {
+                    "result": "PASSED",
+                    "results_configuration": null
+                },
+                "code_block": [
+                    [
+                        1,
+                        "FROM komljen/ubuntu\n"
+                    ],
+                    [
+                        2,
+                        "MAINTAINER Alen Komljen <alen.komljen@live.com>\n"
+                    ],
+                    [
+                        3,
+                        "\n"
+                    ],
+                    [
+                        4,
+                        "RUN \\\n"
+                    ],
+                    [
+                        5,
+                        "  add-apt-repository -y ppa:chris-lea/node.js && \\\n"
+                    ],
+                    [
+                        6,
+                        "  apt-get update && \\\n"
+                    ],
+                    [
+                        7,
+                        "  apt-get -y install \\\n"
+                    ],
+                    [
+                        8,
+                        "          nodejs && \\\n"
+                    ],
+                    [
+                        9,
+                        "  rm -rf /var/lib/apt/lists/*"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    1,
+                    9
+                ],
+                "resource": "/Dockerfile.",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.RunUsingAPT",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-docker-apt-is-not-used"
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CKV_DOCKER_7",
+                "bc_check_id": "BC_DKR_7",
+                "check_name": "Ensure the base image uses a non latest version tag",
+                "check_result": {
+                    "result": "FAILED",
+                    "results_configuration": {
+                        "instruction": "FROM",
+                        "startline": 0,
+                        "endline": 0,
+                        "content": "FROM komljen/ubuntu\n",
+                        "value": "komljen/ubuntu"
+                    }
+                },
+                "code_block": [
+                    [
+                        1,
+                        "FROM komljen/ubuntu\n"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    1,
+                    1
+                ],
+                "resource": "/Dockerfile.FROM",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.ReferenceLatestTag",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-the-base-image-uses-a-non-latest-version-tag"
+            },
+            {
+                "check_id": "CKV_DOCKER_6",
+                "bc_check_id": "BC_DKR_6",
+                "check_name": "Ensure that LABEL maintainer is used instead of MAINTAINER (deprecated)",
+                "check_result": {
+                    "result": "FAILED",
+                    "results_configuration": {
+                        "instruction": "MAINTAINER",
+                        "startline": 1,
+                        "endline": 1,
+                        "content": "MAINTAINER Alen Komljen <alen.komljen@live.com>\n",
+                        "value": "Alen Komljen <alen.komljen@live.com>"
+                    }
+                },
+                "code_block": [
+                    [
+                        2,
+                        "MAINTAINER Alen Komljen <alen.komljen@live.com>\n"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    2,
+                    2
+                ],
+                "resource": "/Dockerfile.MAINTAINER",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.MaintainerExists",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-that-label-maintainer-is-used-instead-of-maintainer-deprecated"
+            },
+            {
+                "check_id": "CKV_DOCKER_2",
+                "bc_check_id": "BC_DKR_2",
+                "check_name": "Ensure that HEALTHCHECK instructions have been added to container images",
+                "check_result": {
+                    "result": "FAILED",
+                    "results_configuration": null
+                },
+                "code_block": [
+                    [
+                        1,
+                        "FROM komljen/ubuntu\n"
+                    ],
+                    [
+                        2,
+                        "MAINTAINER Alen Komljen <alen.komljen@live.com>\n"
+                    ],
+                    [
+                        3,
+                        "\n"
+                    ],
+                    [
+                        4,
+                        "RUN \\\n"
+                    ],
+                    [
+                        5,
+                        "  add-apt-repository -y ppa:chris-lea/node.js && \\\n"
+                    ],
+                    [
+                        6,
+                        "  apt-get update && \\\n"
+                    ],
+                    [
+                        7,
+                        "  apt-get -y install \\\n"
+                    ],
+                    [
+                        8,
+                        "          nodejs && \\\n"
+                    ],
+                    [
+                        9,
+                        "  rm -rf /var/lib/apt/lists/*"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    1,
+                    9
+                ],
+                "resource": "/Dockerfile.",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.HealthcheckExists",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-that-healthcheck-instructions-have-been-added-to-container-images"
+            },
+            {
+                "check_id": "CKV_DOCKER_3",
+                "bc_check_id": "BC_DKR_3",
+                "check_name": "Ensure that a user for the container has been created",
+                "check_result": {
+                    "result": "FAILED",
+                    "results_configuration": null
+                },
+                "code_block": [
+                    [
+                        1,
+                        "FROM komljen/ubuntu\n"
+                    ],
+                    [
+                        2,
+                        "MAINTAINER Alen Komljen <alen.komljen@live.com>\n"
+                    ],
+                    [
+                        3,
+                        "\n"
+                    ],
+                    [
+                        4,
+                        "RUN \\\n"
+                    ],
+                    [
+                        5,
+                        "  add-apt-repository -y ppa:chris-lea/node.js && \\\n"
+                    ],
+                    [
+                        6,
+                        "  apt-get update && \\\n"
+                    ],
+                    [
+                        7,
+                        "  apt-get -y install \\\n"
+                    ],
+                    [
+                        8,
+                        "          nodejs && \\\n"
+                    ],
+                    [
+                        9,
+                        "  rm -rf /var/lib/apt/lists/*"
+                    ]
+                ],
+                "file_path": "/Dockerfile",
+                "file_abs_path": "/Users/pandey/Development/checkov/Dockerfile",
+                "repo_file_path": "/Dockerfile",
+                "file_line_range": [
+                    1,
+                    9
+                ],
+                "resource": "/Dockerfile.",
+                "evaluations": null,
+                "check_class": "checkov.dockerfile.checks.UserExists",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.bridgecrew.io/docs/ensure-that-a-user-for-the-container-has-been-created"
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 3,
+        "failed": 4,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 1,
+        "checkov_version": "2.1.70"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

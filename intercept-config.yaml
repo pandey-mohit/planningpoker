@@ -1,0 +1,28 @@
+Banner: |
+
+  | Banner text here, drop documentation link or quick instructions on how to react to the report
+
+Rules:
+  - name: Compliant module source
+    id: 5
+    description: In non-development environment modules should not be sourced locally nor from git
+    error: This breach blocks your deployment on production environments
+    type: scan
+    solution: "\n\tSource your modules from their latest version on artifactory \n\tMore info at https://XXX"
+    environment: prod
+    fatal: true
+    enforcement: false
+    patterns:
+      - source\s*.*\.git"
+      - \s+source\s*=\s*"((?!https\:).)
+
+#   - name: Collect sparse TF resources outside of modules.
+#     id: 99
+#     description: The following resources were detected outside of compliant module usage
+#     type: collect
+#     outputjson: true
+#     patterns:
+#       - (resource)\s*"(.*)"
+
+ExitCritical: "Critical irregularities found in your code"
+ExitWarning: "Irregularities found in your code"
