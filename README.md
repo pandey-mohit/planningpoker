@@ -28,5 +28,3 @@ npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in browser.
-
-JIRA_TOKEN = ATATT3xFfGF0zVOr-lIh-YgV0BjXiqaSdckIlI8cx9-6Jse726jOqFYCnRKOFNPOW_Y7TEfKRNzeQ7UKfIGipA0X8z7nPTWsQ2CA6N05mTWCjTbUDsuN3AFD5GqJHH3XWlbwz49GpPmhA7zTq-losMuPK3CKnow01TPyajLCHSCU51RiDRaTXNU=943EFEEC
